@@ -1,5 +1,6 @@
 {
   "title": "Europe, 2025",
+  "music": "music-for-indigo.mp3",
   "images": [
     { "file": "001.jpg", "coords": [46.1552, -4.7795] },
     { "file": "002.jpg", "coords": [43.7937, -3.1617] },

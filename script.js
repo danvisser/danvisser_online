@@ -4,6 +4,8 @@ const $title = document.getElementById('title');
 const $photo = document.getElementById('photo');
 const $coords = document.getElementById('coords');
 const $stage = document.getElementById('stage');
+const $playBtn = document.getElementById('play-btn');
+const $audio = document.getElementById('audio');
 
 let images = [];
 let currentIndex = 0;
@@ -14,6 +16,29 @@ async function init() {
 
   $title.textContent = config.title;
   images = config.images;
+
+  if (config.music) {
+    $audio.src = `images/${COLLECTION}/${config.music}`;
+    $audio.volume = 0.5;
+    $playBtn.hidden = false;
+
+    $playBtn.addEventListener('click', () => {
+      if ($audio.paused) {
+        $audio.play();
+        $playBtn.classList.add('playing');
+        $playBtn.setAttribute('aria-label', 'Pause music');
+      } else {
+        $audio.pause();
+        $playBtn.classList.remove('playing');
+        $playBtn.setAttribute('aria-label', 'Play music');
+      }
+    });
+
+    $audio.addEventListener('ended', () => {
+      $playBtn.classList.remove('playing');
+      $playBtn.setAttribute('aria-label', 'Play music');
+    });
+  }
 
   if (!images.length) return;
 

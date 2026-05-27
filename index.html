@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dan Visser — Photography</title>
+  <title>Dan Visser Online</title>
   <meta name="description" content="Photography by Dan Visser.">
 
-  <meta property="og:title" content="Dan Visser — Photography">
+  <meta property="og:title" content="Dan Visser Online">
   <meta property="og:description" content="Photography by Dan Visser.">
   <meta property="og:image" content="https://danvisser.online/images/europe_2025/001.jpg">
   <meta property="og:url" content="https://danvisser.online">
@@ -14,10 +14,6 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -30,6 +26,17 @@
   <main id="stage">
     <img id="photo" alt="" />
   </main>
+
+  <button id="play-btn" aria-label="Play music" hidden>
+    <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <polygon points="6 4 20 12 6 20"/>
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="5" y="4" width="4" height="16"/>
+      <rect x="15" y="4" width="4" height="16"/>
+    </svg>
+  </button>
+  <audio id="audio" preload="none"></audio>
 
   <footer>
     <a id="coords" target="_blank" rel="noopener"></a>
