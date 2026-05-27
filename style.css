@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #fff;
+  color: #222;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 32px;
+  pointer-events: none;
+}
+
+#title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#name {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+main {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 100px;
+  cursor: pointer;
+}
+
+#photo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+main.hover-left {
+  cursor: url('cursor-left.svg') 16 16, pointer;
+}
+
+main.hover-right {
+  cursor: url('cursor-right.svg') 16 16, pointer;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 0 24px;
+  text-align: center;
+  pointer-events: none;
+}
+
+#coords {
+  font-size: 11px;
+  color: #aaa;
+  text-decoration: none;
+  transition: color 200ms ease;
+  pointer-events: auto;
+}
+
+#coords:hover {
+  color: #666;
+  text-decoration: underline;
+}
+
+#coords:empty {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  header {
+    padding: 20px;
+  }
+
+  #title {
+    font-size: 16px;
+  }
+
+  #name {
+    font-size: 13px;
+  }
+
+  main {
+    padding: 40px 16px;
+  }
+
+  main.hover-left,
+  main.hover-right {
+    cursor: pointer;
+  }
+}
