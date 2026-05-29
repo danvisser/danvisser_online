@@ -18,6 +18,7 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
 }
 
 header {
@@ -75,7 +76,7 @@ main.hover-right {
 
 #play-btn {
   position: absolute;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom));
   left: 32px;
   z-index: 10;
   background: none;
@@ -83,8 +84,8 @@ main.hover-right {
   padding: 0;
   cursor: pointer;
   color: #999;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   transition: color 200ms ease;
 }
 
@@ -116,7 +117,7 @@ footer {
   left: 0;
   right: 0;
   z-index: 10;
-  padding: 0 0 24px;
+  padding: 0 0 calc(24px + env(safe-area-inset-bottom));
   text-align: center;
   pointer-events: none;
 }
@@ -161,7 +162,7 @@ footer {
   }
 
   #play-btn {
-    bottom: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom));
     left: 20px;
   }
 }
