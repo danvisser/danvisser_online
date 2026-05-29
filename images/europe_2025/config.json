@@ -22,6 +22,6 @@
     { "file": "003.jpg", "coords": [43.6649, -3.1276], "style": { "maxHeight": "85vh"} },
     { "file": "004.jpg", "coords": [38.7223, -9.1393]},
     { "file": "001.jpg", "coords": [46.1552, -4.7795], "style": { "maxHeight": "80vh"} },
-    { "file": "021.jpg", "coords": [47.6842, -5.3169], "style": { "maxHeight": "85vh"} }
+    { "file": "021.JPG", "coords": [47.6842, -5.3169], "style": { "maxHeight": "85vh"} }
   ]
 }
