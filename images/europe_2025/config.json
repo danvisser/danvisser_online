@@ -5,7 +5,7 @@
     { "file": "016.jpg", "coords": [46.9231, 7.4908], "style": { "maxHeight": "88vh"} },
     { "file": "015.jpg", "coords": [46.6773, 7.8173], "style": { "maxHeight": "85vh"} },
     { "file": "006.jpg", "coords": [43.4170, -2.8127], "style": { "maxHeight": "88vh"} },
-    { "file": "020.jpg", "coords": [43.3253, -1.9718] },
+    { "file": "020.jpg", "coords": [43.3253, -1.9718], "style": { "maxHeight": "88vh"} },
     { "file": "007.jpg", "coords": [42.8096, -0.4187], "style": { "maxHeight": "80vh"} },
     { "file": "008.jpg", "coords": [42.8095, -0.4186]},
     { "file": "017.jpg", "coords": [42.8096, -0.4187], "style": { "maxHeight": "85vh"} },
