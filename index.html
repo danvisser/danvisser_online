@@ -8,18 +8,23 @@
 
   <meta property="og:title" content="Dan Visser Online">
   <meta property="og:description" content="Photography by Dan Visser.">
-  <meta property="og:image" content="https://danvisser.online/images/europe_2025/001.jpg">
+  <meta property="og:image" content="https://danvisser.online/albums/europe_2025/photos/001.jpg">
   <meta property="og:url" content="https://danvisser.online">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <header>
-    <h1 id="title"></h1>
+    <div id="album-switcher">
+      <button id="title-btn" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span id="title"></span><span class="caret" aria-hidden="true">⌄</span>
+      </button>
+      <ul id="album-list" role="listbox" hidden></ul>
+    </div>
     <p id="name">DAN VISSER</p>
   </header>
 
@@ -42,6 +47,6 @@
     <a id="coords" target="_blank" rel="noopener"></a>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>

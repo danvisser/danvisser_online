@@ -1,7 +1,9 @@
-const COLLECTION = 'europe_2025';
 const PAD = 8;
 
 const $title = document.getElementById('title');
+const $titleBtn = document.getElementById('title-btn');
+const $albumSwitcher = document.getElementById('album-switcher');
+const $albumList = document.getElementById('album-list');
 const $name = document.getElementById('name');
 const $photo = document.getElementById('photo');
 const $coords = document.getElementById('coords');
@@ -9,6 +11,8 @@ const $stage = document.getElementById('stage');
 const $playBtn = document.getElementById('play-btn');
 const $audio = document.getElementById('audio');
 
+let manifest = [];
+let activeSlug = null;
 let images = [];
 let currentIndex = 0;
 let resizeTimer;
@@ -109,39 +113,107 @@ function scheduleConstrain() {
   });
 }
 
-async function init() {
-  const res = await fetch(`images/${COLLECTION}/config.json`);
-  const config = await res.json();
+// ---- Album switching ------------------------------------------------------
 
-  $title.textContent = config.title;
-  images = config.images;
+function buildDropdown() {
+  $albumList.innerHTML = '';
+  manifest.forEach((album) => {
+    const li = document.createElement('li');
+    li.textContent = album.title;
+    li.dataset.slug = album.slug;
+    li.setAttribute('role', 'option');
+    li.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeDropdown();
+      if (album.slug !== activeSlug) location.hash = album.slug;
+    });
+    $albumList.appendChild(li);
+  });
+}
 
-  if (config.music) {
-    $audio.src = `images/${COLLECTION}/${config.music}`;
+function updateDropdownActive() {
+  [...$albumList.children].forEach((li) => {
+    li.classList.toggle('active', li.dataset.slug === activeSlug);
+  });
+}
+
+function openDropdown() {
+  $albumList.hidden = false;
+  $albumSwitcher.classList.add('open');
+  $titleBtn.setAttribute('aria-expanded', 'true');
+}
+
+function closeDropdown() {
+  $albumList.hidden = true;
+  $albumSwitcher.classList.remove('open');
+  $titleBtn.setAttribute('aria-expanded', 'false');
+}
+
+function resetPlay() {
+  $playBtn.classList.remove('playing');
+  $playBtn.setAttribute('aria-label', 'Play music');
+}
+
+function togglePlay() {
+  if ($audio.paused) {
+    $audio.play();
+    $playBtn.classList.add('playing');
+    $playBtn.setAttribute('aria-label', 'Pause music');
+  } else {
+    $audio.pause();
+    resetPlay();
+  }
+}
+
+async function loadAlbum(slug) {
+  activeSlug = slug;
+  const res = await fetch(`albums/${slug}/album.json`);
+  const album = await res.json();
+
+  $title.textContent = album.title;
+  images = album.images || [];
+  currentIndex = 0;
+
+  $audio.pause();
+  resetPlay();
+  if (album.music) {
+    $audio.src = `albums/${slug}/${album.music}`;
     $audio.volume = 0.5;
     $playBtn.hidden = false;
-
-    $playBtn.addEventListener('click', () => {
-      if ($audio.paused) {
-        $audio.play();
-        $playBtn.classList.add('playing');
-        $playBtn.setAttribute('aria-label', 'Pause music');
-      } else {
-        $audio.pause();
-        $playBtn.classList.remove('playing');
-        $playBtn.setAttribute('aria-label', 'Play music');
-      }
-    });
-
-    $audio.addEventListener('ended', () => {
-      $playBtn.classList.remove('playing');
-      $playBtn.setAttribute('aria-label', 'Play music');
-    });
+  } else {
+    $audio.removeAttribute('src');
+    $playBtn.hidden = true;
   }
 
-  if (!images.length) return;
+  updateDropdownActive();
+  if (images.length) render();
+}
 
-  render();
+function loadFromHash() {
+  const slug = location.hash.slice(1);
+  const target = manifest.some((a) => a.slug === slug) ? slug : manifest[0].slug;
+  return loadAlbum(target);
+}
+
+async function init() {
+  const res = await fetch('albums/albums.json');
+  manifest = await res.json();
+  if (!manifest.length) return;
+
+  buildDropdown();
+
+  $titleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if ($albumList.hidden) openDropdown();
+    else closeDropdown();
+  });
+  document.addEventListener('click', closeDropdown);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDropdown();
+  });
+
+  $playBtn.addEventListener('click', togglePlay);
+  $audio.addEventListener('ended', resetPlay);
 
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -179,9 +251,13 @@ async function init() {
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 50) navigate(dx > 0 ? -1 : 1);
   });
+
+  window.addEventListener('hashchange', loadFromHash);
+  await loadFromHash();
 }
 
 function navigate(delta) {
+  if (!images.length) return;
   currentIndex = (currentIndex + delta + images.length) % images.length;
   render();
 }
@@ -201,7 +277,7 @@ function render() {
   }
 
   $photo.onload = () => scheduleConstrain();
-  $photo.src = `images/${COLLECTION}/${img.file}`;
+  $photo.src = `albums/${activeSlug}/photos/${img.file}`;
 
   if ($photo.complete && $photo.naturalWidth) {
     scheduleConstrain();
@@ -214,7 +290,7 @@ function render() {
 function preload(idx) {
   const i = (idx + images.length) % images.length;
   const img = new Image();
-  img.src = `images/${COLLECTION}/${images[i].file}`;
+  img.src = `albums/${activeSlug}/photos/${images[i].file}`;
 }
 
 init();
