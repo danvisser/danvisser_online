@@ -1,9 +1,0 @@
-{
-  "title": "Three, 2026",
-  "music": "pearls-for-orphans.mp3",
-  "images": [
-    { "file": "001.jpg", "coords": [51.550388, -0.075909] },  
-    { "file": "002.jpg", "coords": [51.550388, -0.075909] }, 
-    { "file": "003.jpg", "coords": [51.550388, -0.075909] }
-  ]
-}
