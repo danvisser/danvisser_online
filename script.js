@@ -276,21 +276,42 @@ function render() {
     $coords.removeAttribute('href');
   }
 
-  $photo.onload = () => scheduleConstrain();
-  $photo.src = `albums/${activeSlug}/photos/${img.file}`;
-
-  if ($photo.complete && $photo.naturalWidth) {
-    scheduleConstrain();
-  }
+  loadPhoto(img.file);
 
   preload(currentIndex + 1);
   preload(currentIndex - 1);
 }
 
+function photoUrl(file) {
+  return `albums/${activeSlug}/photos/${file}`;
+}
+
+function alternateExt(file) {
+  if (file.endsWith('.jpg')) return `${file.slice(0, -4)}.JPG`;
+  if (file.endsWith('.JPG')) return `${file.slice(0, -4)}.jpg`;
+  return null;
+}
+
+function loadPhoto(file) {
+  $photo.onload = () => scheduleConstrain();
+  $photo.onerror = () => {
+    const alt = alternateExt(file);
+    if (!alt || $photo.dataset.retried === file) return;
+    $photo.dataset.retried = file;
+    $photo.src = photoUrl(alt);
+  };
+  delete $photo.dataset.retried;
+  $photo.src = photoUrl(file);
+
+  if ($photo.complete && $photo.naturalWidth) {
+    scheduleConstrain();
+  }
+}
+
 function preload(idx) {
   const i = (idx + images.length) % images.length;
   const img = new Image();
-  img.src = `albums/${activeSlug}/photos/${images[i].file}`;
+  img.src = photoUrl(images[i].file);
 }
 
 init();
