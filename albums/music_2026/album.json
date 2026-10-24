@@ -3,17 +3,18 @@
   "music": "the-orchids.mp3",
   "images": [
     { "file": "001.jpg", "coords": [51.5407, -0.1439] },
-    { "file": "002.jpg", "coords": [51.5143, -0.0530] }, 
+    { "file": "013.JPG", "coords": [51.5524, -0.0713] }, 
+    { "file": "010.JPG", "coords": [51.5685, -0.1027] }, 
     { "file": "003.jpg", "coords": [51.4698, -0.0683] },
+    { "file": "002.jpg", "coords": [51.5143, -0.0530] }, 
+    { "file": "006.jpg", "coords": [51.5143, -0.0530] },
     { "file": "004.jpg", "coords": [51.4698, -0.0683] },
     { "file": "005.jpg", "coords": [51.5159, -0.1353] },
-    { "file": "006.jpg", "coords": [51.5143, -0.0530] },
-    { "file": "013.JPG", "coords": [51.5524, -0.0713] }, 
+    { "file": "011.JPG", "coords": [51.5685, -0.1027] },
+    { "file": "012.JPG", "coords": [51.5685, -0.1027] },
+    { "file": "009.JPG", "coords": [51.5062, -0.1308], "style": { "maxHeight": "65vh"} },
     { "file": "008.JPG", "coords": [51.5062, -0.1308] },
     { "file": "007.JPG", "coords": [51.5062, -0.1308] },
-    { "file": "009.JPG", "coords": [51.5062, -0.1308], "style": { "maxHeight": "65vh"} },
-    { "file": "010.JPG", "coords": [51.5685, -0.1027] }, 
-    { "file": "011.JPG", "coords": [51.5685, -0.1027] },
-    { "file": "012.JPG", "coords": [51.5685, -0.1027] }
+    { "file": "014.JPG", "coords": [51.5685, -0.1027] }
   ]
 }
